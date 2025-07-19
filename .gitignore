@@ -2,3 +2,4 @@ venv/
 mlruns/
 logs/
 gcp-service-account.json/
+gcp-service-account.json
