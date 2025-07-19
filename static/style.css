@@ -1,0 +1,122 @@
+/* Reset some base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(120deg, #74ebd5, #9face6);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 30px 40px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 600px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #3f3f3f;
+    font-size: 28px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #444;
+}
+
+input[type="number"],
+select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="number"]:focus,
+select:focus {
+    border-color: #5d8df7;
+    box-shadow: 0 0 5px rgba(93, 141, 247, 0.5);
+    outline: none;
+}
+
+button[type="submit"] {
+    background-color: #5d8df7;
+    color: #fff;
+    padding: 14px 18px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #3f6de0;
+    transform: scale(1.03);
+}
+
+.result {
+    margin-top: 25px;
+    padding: 16px;
+    background-color: #f1f1f1;
+    border-left: 6px solid #5d8df7;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #222;
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    input,
+    select,
+    button {
+        font-size: 15px;
+    }
+}
