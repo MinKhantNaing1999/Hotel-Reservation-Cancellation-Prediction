@@ -18,4 +18,4 @@ RUN python pipeline/training_pipeline.py
 
 EXPOSE 8080
 
-CMD [ "python" , "application.py" ]
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "application:app"]
