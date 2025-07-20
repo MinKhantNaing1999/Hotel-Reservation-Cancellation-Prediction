@@ -66,10 +66,11 @@ pipeline {
                         gcloud auth activate-service-account --key-file=\${GOOGLE_APPLICATION_CREDENTIALS}
                         gcloud config set project ${GCP_PROJECT}
                         gcloud run deploy hotel-reservation \
-                            --image=gcr.io/${GCP_PROJECT}/hotel-reservation:latest \
-                            --platform=managed \
-                            --region=us-central1 \
-                            --allow-unauthenticated
+                        --image=gcr.io/${GCP_PROJECT}/hotel-reservation:latest \
+                        --platform=managed \
+                        --region=us-central1 \
+                        --allow-unauthenticated \
+                        --port=5001
                         """
                     }
                 }

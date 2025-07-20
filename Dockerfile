@@ -1,7 +1,8 @@
 FROM python:slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+    PYTHONUNBUFFERED=1 \
+    PORT=8080
 
 WORKDIR /app
 
@@ -14,6 +15,6 @@ RUN pip install --no-cache-dir -e .
 # Train the model separately and save it, then copy model file here if possible
 RUN python pipeline/training_pipeline.py
 
-EXPOSE 8080
+EXPOSE 5001
 
-CMD ["gunicorn", "--bind", "0.0.0.0:8080", "application:app"]
+CMD ["python", "application.py"]
