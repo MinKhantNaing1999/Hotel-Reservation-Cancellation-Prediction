@@ -15,6 +15,6 @@ RUN pip install --no-cache-dir -e .
 # Train the model separately and save it, then copy model file here if possible
 RUN python pipeline/training_pipeline.py
 
-EXPOSE 5001
+EXPOSE 8080
 
 CMD ["python", "application.py"]
