@@ -42,19 +42,24 @@ pipeline {
             steps {
                 withCredentials([file(credentialsId: 'gcp-key', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
                     script {
-                        echo 'Building and pushing Docker image to GCR...'
+                        echo 'Building and pushing Docker image to GCR (amd64)...'
                         sh """
                         export PATH=\$PATH:${GCLOUD_PATH}
                         gcloud auth activate-service-account --key-file=\${GOOGLE_APPLICATION_CREDENTIALS}
                         gcloud config set project ${GCP_PROJECT}
                         gcloud auth configure-docker --quiet
-                        docker build -t gcr.io/${GCP_PROJECT}/hotel-reservation:latest .
-                        docker push gcr.io/${GCP_PROJECT}/hotel-reservation:latest
+
+                        # Ensure buildx is initialized
+                        docker buildx create --use || true
+
+                        # Build for amd64 and push directly
+                        docker buildx build --platform linux/amd64 -t gcr.io/${GCP_PROJECT}/hotel-reservation:latest --push .
                         """
                     }
                 }
             }
         }
+
 
         stage('Deploy to Google Cloud Run') {
             steps {
@@ -69,12 +74,12 @@ pipeline {
                         --image=gcr.io/${GCP_PROJECT}/hotel-reservation:latest \
                         --platform=managed \
                         --region=us-central1 \
-                        --allow-unauthenticated \
-                        --port=5001
+                        --allow-unauthenticated
                         """
                     }
                 }
             }
         }
+
     }
 }
